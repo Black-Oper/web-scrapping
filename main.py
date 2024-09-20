@@ -35,10 +35,7 @@ sleep(1.5)
 
 div = driver.find_element(By.CLASS_NAME, 'top-nav')
 input1 = div.find_element(By.CLASS_NAME, 'search-input')
-
-str = input('Informe o que deseja pesquisar: ')
-
-input1.send_keys(str)
+input1.send_keys('notebook')
 
 input1.send_keys(Keys.RETURN)
 
@@ -140,8 +137,13 @@ def find_common_items(file1, file2, file3):
     return common_items
 
 
+def add_common_items_to_file(common_items, filename):
+    with open(filename, 'w') as f:
+        for item in list(common_items)[:5]:
+            f.write(item + '\n')
+
+
 common_items = find_common_items('best-sell.txt', 'best-discount.txt', 'price-low-high.txt')
-for item in common_items:
-    print(item)
+add_common_items_to_file(common_items, 'common_items.txt')
 
 driver.quit()
